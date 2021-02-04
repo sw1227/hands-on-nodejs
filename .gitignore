@@ -2,3 +2,8 @@ node_modules/
 
 # Next.js
 .next/
+
+# Data storage
+*/leveldb/leveldb/
+sqlite
+*/file-system/*.json
