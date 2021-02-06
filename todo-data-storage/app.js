@@ -68,4 +68,5 @@ app.use((err, req, res, next) => {
   res.status(err.statusCode || 500).json({ error: err.message })
 })
 
-app.listen(3000)
+// chai-httpを使うために外部からアクセス可能にする
+module.exports = app.listen(3000)

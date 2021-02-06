@@ -1,7 +1,6 @@
 'use strict'
 const { promisify } = require('util')
-const { join, resolve } = require('path')
-const { rejects } = require('assert')
+const { join } = require('path')
 const sqlite3 = process.env.NODE_ENV === 'production'
   ? require('sqlite3')
   : require('sqlite3').verbose()
@@ -38,14 +37,12 @@ function rowToTodo (row) {
   return { ...row, completed: !!row.completed }
 }
 
-exports.fetchAll = () => {
+exports.fetchAll = () =>
   dbAll('SELECT * FROM todo').then(rows => rows.map(rowToTodo))
-}
 
-exports.fetchByCompleted = completed => {
+exports.fetchByCompleted = completed =>
   dbAll('SELECT * FROM todo WHERE completed = ?', completed)
     .then(rows => rows.map(rowToTodo))
-}
 
 exports.create = async todo => {
   // 成功時にはundefinedで解決されるPromiseインスタンスを返すのでreturnしない

@@ -39,9 +39,7 @@ exports.create = todo => db.batch()
   .put(`todo-completed-${todo.completed}:${todo.id}`, todo.id)
   .write()
 
-
-// TODO: 不具合があるらしい
-exports.update = (id, update) => {
+exports.update = (id, update) =>
   db.get(`todo:${id}`).then(
     content => {
       const oldTodo = JSON.parse(content)
@@ -57,12 +55,11 @@ exports.update = (id, update) => {
           .del(`todo-completed-${oldTodo.completed}:${id}`)
           .put(`todo-completed-${newTodo.completed}:${id}`, id)
       }
-      return batch.write()
+      return batch.write().then(() => newTodo)
     },
     // ToDoが存在しない場合はnullを返し、それ以外はエラーにする
     err => err.notFound ? null : Promise.reject(err)
   )
-}
 
 exports.remove = id =>
   db.get(`todo:${id}`).then(
