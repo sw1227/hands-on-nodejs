@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  web:
+    build: .
+    volumes:
+      # カレントディレクトリをコンテナの/usr/src/appにマウント
+      - .:/usr/src/app
+      # node_modulesはマウント対象から除外
+      - /usr/src/app/node_modules/
+    ports:
+      - 3000:3000
+    command: npm run dev
