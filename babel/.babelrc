@@ -1,0 +1,22 @@
+{
+  "presets": [
+    [
+      // プリセットの指定
+      "@babel/preset-env",
+      {
+        // コンパイル後のJavaScriptの実行環境
+        "targets": {
+          "node": true // 利用しているNode.jsのバージョン向けにコンパイル
+        },
+        // コードで利用しているAPIのポリフィルを自動的に追加
+        "useBuiltIns": "usage",
+        "corejs": {
+          // ポリフィルの実体を提供するcore-jsのバージョン
+          "version": 3,
+          // 提案段階のAPIのポリフィルも利用
+          "proposals": true
+        }
+      }
+    ]
+  ]
+}
